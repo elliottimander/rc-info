@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info till användare – Registercentralen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #5B80C0;
+      --brand-light: #EEF2F9;
+      --brand-dark: #3D5A8A;
+      --text: #1a1a2e;
+      --text-muted: #5a5a6e;
+      --bg: #ffffff;
+      --border: #e2e6ee;
+      --success: #2e7d5b;
+      --success-light: #edf7f2;
+      --warning: #c4760a;
+      --warning-light: #fef7ec;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-shield {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: -0.3px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: white;
+      padding: 56px 24px 48px;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* Main content */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Callout box */
+    .callout {
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+
+    .callout.important {
+      background: var(--warning-light);
+      border-left: 4px solid var(--warning);
+    }
+
+    .callout.tip {
+      background: var(--brand-light);
+      border-left: 4px solid var(--brand);
+    }
+
+    .callout.success {
+      background: var(--success-light);
+      border-left: 4px solid var(--success);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .callout.important .callout-title { color: var(--warning); }
+    .callout.tip .callout-title { color: var(--brand); }
+    .callout.success .callout-title { color: var(--success); }
+
+    .callout p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Section headings */
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .section p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 24px 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+
+    .step-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .step-line {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      min-height: 24px;
+    }
+
+    .step:last-child .step-line { display: none; }
+
+    .step-content {
+      padding-bottom: 32px;
+    }
+
+    .step:last-child .step-content { padding-bottom: 0; }
+
+    .step-content h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      padding-top: 6px;
+    }
+
+    .step-content p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    .step-content .sub-note {
+      font-size: 14px;
+      color: var(--brand);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* Benefits list */
+    .benefits {
+      display: grid;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .benefit-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--brand-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .benefit-icon svg {
+      width: 16px;
+      height: 16px;
+      color: var(--brand);
+    }
+
+    .benefit p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* FAQ style */
+    .faq-item {
+      margin-bottom: 32px;
+    }
+
+    .faq-item h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .faq-item p {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    /* Example image placeholder */
+    .example-image {
+      background: var(--brand-light);
+      border: 2px dashed var(--brand);
+      border-radius: 12px;
+      padding: 40px 24px;
+      text-align: center;
+      margin: 24px 0;
+      opacity: 0.8;
+    }
+
+    .example-image p {
+      color: var(--brand);
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    /* Link button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand);
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: var(--brand-dark); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--brand);
+      border: 1.5px solid var(--brand);
+    }
+
+    .btn-outline:hover {
+      background: var(--brand-light);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    /* Security badges */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .security-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: var(--brand-light);
+      border-radius: 10px;
+    }
+
+    .security-item svg {
+      width: 20px;
+      height: 20px;
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+
+    .security-item span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Footer */
+    .footer {
+      background: #f7f8fa;
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .footer h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .footer p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .footer a {
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 20px 36px; }
+      .hero h1 { font-size: 26px; }
+      .content { padding: 32px 20px 60px; }
+      .security-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-inner">
+      <svg class="logo-shield" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 2L4 7v9c0 8.4 5.1 14.3 12 17 6.9-2.7 12-8.6 12-17V7L16 2z" fill="#5B80C0"/>
+        <path d="M13.5 20.5l-4-4 1.4-1.4 2.6 2.6 6.6-6.6 1.4 1.4-8 8z" fill="white"/>
+      </svg>
+      <span class="logo-text">Registercentralen</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>Info till användare</h1>
+      <p>Allt du behöver veta om hur du laddar upp ditt belastningsregister – snabbt, enkelt och säkert.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Important callout -->
+    <div class="callout important">
+      <div class="callout-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Viktigt att tänka på
+      </div>
+      <p>Ladda upp ditt registerutdrag så snart som möjligt – det hjälper föreningen att bli en <strong>Verifierad Trygg Förening</strong>. Vi skickar påminnelser under 30 dagar tills du laddat upp det.</p>
+    </div>
+
+    <!-- What is RC -->
+    <div class="section">
+      <h2>Vad är Registercentralen?</h2>
+      <p>Registercentralen är ett digitalt verktyg som hjälper din förening att hantera utdrag ur belastningsregistret – enkelt, säkert och automatiskt. Vårt mål är att göra det så smidigt som möjligt för dig att ladda upp ditt utdrag och få det godkänt, helt utan krångel.</p>
+    </div>
+
+    <!-- Why -->
+    <div class="section">
+      <h2>Varför används Registercentralen?</h2>
+      <p>Som ledare, domare eller funktionär inom barn- och ungdomsidrott behöver du visa upp ett giltigt belastningsregister. Tidigare har det ofta skett via mejl, papperslappar eller sms – vilket lätt blir rörigt.</p>
+      <p>Med Registercentralen:</p>
+      <div class="benefits">
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <p>Du får tydliga påminnelser och instruktioner.</p>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <p>Du laddar upp ditt utdrag snabbt via mobil eller dator.</p>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p>Du vet direkt när allt är godkänt.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Steps -->
+    <div class="section">
+      <h2>Så här gör du – steg för steg</h2>
+      <p>När du blir inlagd i systemet av din förening får du ett utskick via Kivra, mejl och sms med instruktioner.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-indicator">
+            <div class="step-number">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <h3>Du får ett utskick</h3>
+            <p>Via Kivra, mejl eller sms med instruktioner och länk från Registercentralen.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-indicator">
+            <div class="step-number">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <h3>Beställ utdrag från Polisen</h3>
+            <p>Beställ ditt utdrag digitalt via polisen.se. Välj "Utdrag för arbete med barn i annan verksamhet" och leverans till digital brevlåda (t.ex. Kivra).</p>
+            <div class="btn-group">
+              <a href="https://polisen.se/tjanster-tillstand/belastningsregistret/kontrollera-dina-uppgifter-i-belastningsregistret/" class="btn" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Beställ hos Polisen
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-indicator">
+            <div class="step-number">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <h3>Spara utdraget</h3>
+            <p>Spara utdraget som PDF eller ta en skärmdump.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-indicator">
+            <div class="step-number">4</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <h3>Ladda upp på Registercentralen</h3>
+            <p>Logga in med BankID och ladda upp ditt utdrag. Systemet kontrollerar automatiskt att det är äkta, rätt och giltigt.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example image placeholder -->
+      <div class="example-image">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5B80C0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <p>Här visas ett exempel på hur ett digitalt registerutdrag ser ut.<br>
+        <span style="font-size: 13px; opacity: 0.7;">(Bild läggs till av Registercentralen)</span></p>
+      </div>
+    </div>
+
+    <div class="callout success">
+      <div class="callout-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Bra att veta
+      </div>
+      <p>Utdraget gäller i <strong>12 månader</strong> – vi påminner dig automatiskt när det är dags igen. Är du aktiv i flera föreningar räcker en uppladdning per år, om alla föreningar använder Registercentralen.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- FAQ -->
+    <div class="section">
+      <h2>Vanliga frågor</h2>
+
+      <div class="faq-item">
+        <h3>Har du ingen digital brevlåda?</h3>
+        <p>Alla i Sverige över 16 år kan använda Kivra kostnadsfritt. Ladda ner Kivra i mobilen för att kunna få hem ditt digitala belastningsregister från Polisen. Det fungerar lika bra med andra digitala brevlådor.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Är du under 16 år?</h3>
+        <p>Beställ hem ditt fysiska register från Polisen. Det läggs automatiskt in som manuell granskning så att admin i föreningen vet att det behöver granskas manuellt.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Kan du inte ladda upp ditt digitala register?</h3>
+        <p>Logga in och begär manuell granskning, visa sedan upp det fysiska utdraget för ansvarig i föreningen.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Vad betyder nekat register?</h3>
+        <p>Vi kan bara granska digitala register. Fysiska belastningsregister nekas automatiskt eftersom det inte går att säkerställa dessa mot polisens kontrolltjänst. De hanteras istället genom manuell granskning.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Vad händer om du inte laddat upp ditt register?</h3>
+        <p>Föreningen behöver att alla ledare har ett godkänt register. Den som saknar det bör ladda upp omgående – rekommendationen är att den som saknar godkänt register inte bör verka i verksamheten förrän det är klart.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Security -->
+    <div class="section">
+      <h2>Säkerhet och integritet</h2>
+      <p>Vi tar din integritet på största allvar. All information hanteras enligt GDPR.</p>
+      <div class="security-grid">
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Vi sparar bara det nödvändiga</span>
+        </div>
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          <span>Utdraget raderas efter granskning</span>
+        </div>
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>All data är krypterad</span>
+        </div>
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Inlogg via BankID</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-inner">
+      <h3>Har du frågor?</h3>
+      <p>Vi bygger Registercentralen för att förenkla och trygga ledarskapet. Dina synpunkter och frågor är alltid välkomna.</p>
+      <a href="mailto:support@registercentralen.com">support@registercentralen.com</a>
+    </div>
+  </div>
+
+</body>
+</html>

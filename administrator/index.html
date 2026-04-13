@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info till administratör – Registercentralen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #5B80C0;
+      --brand-light: #EEF2F9;
+      --brand-dark: #3D5A8A;
+      --text: #1a1a2e;
+      --text-muted: #5a5a6e;
+      --bg: #ffffff;
+      --border: #e2e6ee;
+      --success: #2e7d5b;
+      --success-light: #edf7f2;
+      --warning: #c4760a;
+      --warning-light: #fef7ec;
+      --danger: #c0392b;
+      --danger-light: #fdf0ef;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-shield { width: 32px; height: 32px; flex-shrink: 0; }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: -0.3px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: white;
+      padding: 56px 24px 48px;
+    }
+
+    .hero-inner { max-width: 720px; margin: 0 auto; }
+
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      opacity: 0.9;
+      max-width: 580px;
+      line-height: 1.6;
+    }
+
+    /* Content */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Callout */
+    .callout {
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+
+    .callout.important {
+      background: var(--warning-light);
+      border-left: 4px solid var(--warning);
+    }
+
+    .callout.tip {
+      background: var(--brand-light);
+      border-left: 4px solid var(--brand);
+    }
+
+    .callout.success {
+      background: var(--success-light);
+      border-left: 4px solid var(--success);
+    }
+
+    .callout.danger {
+      background: var(--danger-light);
+      border-left: 4px solid var(--danger);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .callout.important .callout-title { color: var(--warning); }
+    .callout.tip .callout-title { color: var(--brand); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.danger .callout-title { color: var(--danger); }
+
+    .callout p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Sections */
+    .section { margin-bottom: 48px; }
+
+    .section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .section p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .section h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      margin-top: 32px;
+    }
+
+    /* Feature cards */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .feature-card {
+      background: var(--brand-light);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .feature-card svg {
+      width: 22px;
+      height: 22px;
+      color: var(--brand);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-card .feature-text h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .feature-card .feature-text p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Process flow (horizontal on desktop) */
+    .process-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 24px 0;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+
+    .process-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .process-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .process-line {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      min-height: 24px;
+    }
+
+    .process-step:last-child .process-line { display: none; }
+
+    .process-content { padding-bottom: 28px; }
+    .process-step:last-child .process-content { padding-bottom: 0; }
+
+    .process-content h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      padding-top: 6px;
+    }
+
+    .process-content p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Action cards */
+    .action-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .action-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .action-card p:last-child { margin-bottom: 0; }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-auto { background: var(--success-light); color: var(--success); }
+    .badge-manual { background: var(--warning-light); color: var(--warning); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* Security */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .security-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--brand-light);
+      border-radius: 10px;
+    }
+
+    .security-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+
+    .security-item span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Summary box */
+    .summary-box {
+      background: var(--brand-light);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .summary-box h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-bottom: 12px;
+    }
+
+    .summary-box p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: #f7f8fa;
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-inner { max-width: 720px; margin: 0 auto; }
+
+    .footer h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .footer p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .footer a {
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 20px 36px; }
+      .hero h1 { font-size: 26px; }
+      .content { padding: 32px 20px 60px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .security-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-inner">
+      <svg class="logo-shield" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 2L4 7v9c0 8.4 5.1 14.3 12 17 6.9-2.7 12-8.6 12-17V7L16 2z" fill="#5B80C0"/>
+        <path d="M13.5 20.5l-4-4 1.4-1.4 2.6 2.6 6.6-6.6 1.4 1.4-8 8z" fill="white"/>
+      </svg>
+      <span class="logo-text">Registercentralen</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>Info till administratör</h1>
+      <p>Så använder ni Registercentralen för att hantera belastningsregister i er förening – automatiskt och utan krångel.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Key message -->
+    <div class="callout important">
+      <div class="callout-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Viktigt att föra vidare
+      </div>
+      <p>För att föreningen ska bli en <strong>Verifierad Trygg Förening</strong> behöver användarna ladda upp sina registerutdrag – gärna så snart som möjligt. Vi skickar påminnelser under 30 dagar tills uppladdningen är klar. Därefter får ni ett utskick om någons register fortfarande saknas. <strong>Betona för era ledare varför det är viktigt att ladda upp snabbt.</strong></p>
+    </div>
+
+    <!-- What is RC -->
+    <div class="section">
+      <h2>Vad är Registercentralen?</h2>
+      <p>Registercentralen är en digital tjänst som automatiserar och säkrar hanteringen av belastningsregister för personer med uppdrag i föreningen. Vi ser till att utdragen samlas in, valideras och dokumenteras – utan att ni behöver jaga, dubbelkolla eller hålla koll på datum.</p>
+
+      <div class="summary-box">
+        <h4>Kort sagt</h4>
+        <p>Allt ni behöver göra är att lägga in era ledare – resten sköter systemet. Som en diskmaskin för belastningsregister.</p>
+      </div>
+    </div>
+
+    <!-- Admin features -->
+    <div class="section">
+      <h2>Vad kan ni göra i admin-gränssnittet?</h2>
+      <p>Ni får tillgång till ett enkelt gränssnitt där ni har full koll.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          <div class="feature-text">
+            <h4>Hantera personer</h4>
+            <p>Lägg in eller ta bort personer som tillhör verksamheten.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="feature-text">
+            <h4>Följ status</h4>
+            <p>Se status för varje person – t.ex. "giltigt register" eller "saknas".</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <div class="feature-text">
+            <h4>Admin-roller</h4>
+            <p>Lägg till eller ta bort admin-roller. Personen måste vara användare först.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <div class="feature-text">
+            <h4>Manuell granskning</h4>
+            <p>Granska och godkänn register som inte kan verifieras automatiskt.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          Automatiska uppdateringar
+        </div>
+        <p>Registercentralen skickar er statusuppdatering efter <strong>14 och 30 dagar</strong> med information om hur många som laddat upp sitt register.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- How does a leader use it -->
+    <div class="section">
+      <h2>Hur fungerar det för ledaren?</h2>
+      <p>När en person läggs in i systemet går det direkt ut ett utskick via Kivra, mejl och sms med instruktioner.</p>
+
+      <div class="process-flow">
+        <div class="process-step">
+          <div class="process-indicator">
+            <div class="process-number">1</div>
+            <div class="process-line"></div>
+          </div>
+          <div class="process-content">
+            <h4>Automatisk påminnelse</h4>
+            <p>Ledaren får ett utskick med instruktioner och länk.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-indicator">
+            <div class="process-number">2</div>
+            <div class="process-line"></div>
+          </div>
+          <div class="process-content">
+            <h4>Inlogg med BankID</h4>
+            <p>Ledaren loggar in och laddar upp sitt utdrag från Polisen (t.ex. via Kivra).</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-indicator">
+            <div class="process-number">3</div>
+            <div class="process-line"></div>
+          </div>
+          <div class="process-content">
+            <h4>Automatisk verifiering</h4>
+            <p>Systemet kontrollerar att dokumentet är äkta, rätt och giltigt – helt automatiskt. <span class="badge badge-auto">Automatiskt</span></p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-indicator">
+            <div class="process-number">4</div>
+            <div class="process-line"></div>
+          </div>
+          <div class="process-content">
+            <h4>Giltigt i 12 månader</h4>
+            <p>Registret gäller i 12 månader. En uppladdning gäller för alla föreningar ledaren är aktiv i. Sedan påminns ledaren automatiskt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- When does admin need to act -->
+    <div class="section">
+      <h2>När behöver ni agera?</h2>
+      <p>Som föreningsansvarig behöver ni bara agera i två fall. Allt annat sköts automatiskt.</p>
+
+      <div class="action-card">
+        <h4>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c4760a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          1. Utdrag saknas efter påminnelser
+        </h4>
+        <p>Om en person inte laddat upp sitt register trots automatiska påminnelser, får ni en notis. Ni avgör hur det ska hanteras.</p>
+      </div>
+
+      <div class="action-card">
+        <h4>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          2. Avvikelse eller manuell granskning
+        </h4>
+        <p>Om en belastning upptäcks, eller om ett fysiskt register laddats upp, hamnar det under "manuell granskning". Ni får en notis och hanterar det enligt föreningens egna rutiner.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Manual review -->
+    <div class="section">
+      <h2>Manuell granskning – hur går det till?</h2>
+      <p>Register som inte kan granskas automatiskt (t.ex. fysiska register) behöver granskas och godkännas manuellt av ansvarig admin.</p>
+
+      <h3>När användaren begär manuell granskning</h3>
+      <div class="process-flow">
+        <div class="process-step">
+          <div class="process-indicator">
+            <div class="process-number">1</div>
+            <div class="process-line"></div>
+          </div>
+          <div class="process-content">
+            <h4>Användaren begär granskning</h4>
+            <p>Ledaren loggar in på Registercentralen och begär manuell granskning.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-indicator">
+            <div class="process-number">2</div>
+            <div class="process-line"></div>
+          </div>
+          <div class="process-content">
+            <h4>Ledaren visar upp registret</h4>
+            <p>Ledaren visar sitt fysiska register för ansvarig i föreningen.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-indicator">
+            <div class="process-number">3</div>
+            <div class="process-line"></div>
+          </div>
+          <div class="process-content">
+            <h4>Admin godkänner eller avslår</h4>
+            <p>Admin granskar registret och godkänner eller avslår det manuellt i systemet, med datum för granskning.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Om admin behöver flagga på eget initiativ</h3>
+      <p>Om en ledare visar upp sitt register utan att ha begärt manuell granskning kan admin själv flagga det: Logga in → gå till rätt användare → "Visa användare" → "Flagga för Manuell granskning" → godkänn eller avslå.</p>
+
+      <h3>Under 16 år</h3>
+      <p>Personer under 16 kan inte få hem ett digitalt register (16 års-gräns på Kivra). Dessa hamnar automatiskt på manuell granskning. Admin granskar registret, godkänner eller avslår personen i systemet tillsammans med datum – sedan påminner vi personen till nästa år.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- What happens after 30 days -->
+    <div class="section">
+      <h2>Vad händer om register saknas?</h2>
+
+      <div class="callout danger">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Konsekvenser
+        </div>
+        <p>Personen bör ladda upp omgående. Vår rekommendation är att den som saknar godkänt register inte bör verka i verksamheten förrän den är godkänd i Registercentralen.</p>
+        <p style="margin-top: 8px;"><strong>Tips:</strong> Ni kan hänvisa till Registercentralen – att berörd person måste finnas godkänd för att medverka på aktiviteter. Ni bestämmer dock denna rutin själva.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Security -->
+    <div class="section">
+      <h2>Säkerhet och integritet</h2>
+      <p>Vi följer GDPR och lagrar inte känsliga uppgifter längre än nödvändigt.</p>
+
+      <div class="security-grid">
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          <span>Raderas efter kontroll</span>
+        </div>
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Krypterad kommunikation</span>
+        </div>
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Inlogg via BankID</span>
+        </div>
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Minsta möjliga data</span>
+        </div>
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Automatisk radering varje år</span>
+        </div>
+        <div class="security-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Ladda ner dokumentation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-inner">
+      <h3>Vi finns här för er</h3>
+      <p>Har ni frågor, feedback eller önskemål? Vi utvecklar tjänsten tillsammans med er – för ett tryggare föreningsliv.</p>
+      <a href="mailto:support@registercentralen.com">support@registercentralen.com</a>
+    </div>
+  </div>
+
+</body>
+</html>
