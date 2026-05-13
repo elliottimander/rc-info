@@ -386,6 +386,40 @@
       font-weight: 500;
     }
 
+    /* Reason list (for manual review reasons) */
+    .reason-list {
+      list-style: none;
+      margin: 20px 0 8px;
+      padding: 0;
+    }
+
+    .reason-list li {
+      position: relative;
+      padding: 14px 0 14px 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .reason-list li:last-child { border-bottom: none; }
+
+    .reason-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 22px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+
+    .reason-list li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
     /* Responsive */
     @media (max-width: 600px) {
       .hero { padding: 40px 20px 36px; }
@@ -486,7 +520,7 @@
     <!-- How does a leader use it -->
     <div class="section">
       <h2>Hur fungerar det för ledaren?</h2>
-      <p>När en person läggs in i systemet går det direkt ut ett utskick via Kivra, mejl och sms med instruktioner.</p>
+      <p>När en person läggs in i systemet går det direkt ut ett utskick via Kivra, mejl och sms med instruktioner. Vi påminner sedan personen i 30 dagar eller tills hen laddat upp sitt register.</p>
 
       <div class="process-flow">
         <div class="process-step">
@@ -563,7 +597,16 @@
       <h2>Manuell granskning – hur går det till?</h2>
       <p>Register som inte kan granskas automatiskt (t.ex. fysiska register) behöver granskas och godkännas manuellt av ansvarig admin.</p>
 
-      <h3>När användaren begär manuell granskning</h3>
+      <h3>Anledningar till manuell granskning</h3>
+      <ul class="reason-list">
+        <li><strong>Användaren begär det själv</strong> – t.ex. vid uppvisande av fysiskt register.</li>
+        <li><strong>Admin har flaggat manuellt</strong> – klicka in på användaren och välj "Begär manuell granskning". Det finns även möjlighet att välja "Godkänn manuellt" direkt.</li>
+        <li><strong>Personen är 15 år</strong> – kan inte ha digital brevlåda (Kivra kräver 16 år), hamnar därför på manuell granskning.</li>
+        <li><strong>Belastning har upptäckts</strong> vid uppladdning.</li>
+        <li><strong>Fel filtyp har laddats upp upprepade gånger.</strong></li>
+      </ul>
+
+      <h3>Så hanteras manuell granskning</h3>
       <div class="process-flow">
         <div class="process-step">
           <div class="process-indicator">
@@ -571,8 +614,8 @@
             <div class="process-line"></div>
           </div>
           <div class="process-content">
-            <h4>Användaren begär granskning</h4>
-            <p>Ledaren loggar in på Registercentralen och begär manuell granskning.</p>
+            <h4>Personen är markerad för manuell granskning</h4>
+            <p>Personen syns med status "manuell granskning" i admin-gränssnittet.</p>
           </div>
         </div>
         <div class="process-step">
@@ -596,12 +639,52 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <h3>Om admin behöver flagga på eget initiativ</h3>
-      <p>Om en ledare visar upp sitt register utan att ha begärt manuell granskning kan admin själv flagga det: Logga in → gå till rätt användare → "Visa användare" → "Flagga för Manuell granskning" → godkänn eller avslå.</p>
+    <div class="divider"></div>
 
-      <h3>Under 16 år</h3>
-      <p>Personer under 16 kan inte få hem ett digitalt register (16 års-gräns på Kivra). Dessa hamnar automatiskt på manuell granskning. Admin granskar registret, godkänner eller avslår personen i systemet tillsammans med datum – sedan påminner vi personen till nästa år.</p>
+    <!-- Age logic -->
+    <div class="section">
+      <h2>Hur vi hanterar olika åldrar</h2>
+      <p>Hanteringen utgår från Polisens regler för belastningsregistret och vilka kanaler (t.ex. digital brevlåda) som är tillgängliga vid olika åldrar.</p>
+
+      <ul class="reason-list">
+        <li><strong>Under 15 år – får inga påminnelser.</strong> Straffmyndighetsåldern i Sverige är 15 år. Personer under 15 kan inte förekomma i belastningsregistret, så kontroll är inte aktuell. Vi exkluderar dem för att undvika onödig administration och hantering av underårigas personuppgifter.</li>
+        <li><strong>15 år – manuell granskning.</strong> Utdrag kan finnas i registret, men Kivra kräver att man fyllt 16. Utdraget skickas hem fysiskt och granskas manuellt av er – det går inte att lägga i det automatiska Kivra-flödet.</li>
+        <li><strong>16 år och uppåt – ordinarie flöde.</strong> Vid 16 års ålder finns både Kivra och fysisk brevlåda – hanteras därför i samma automatiserade flöde som vuxna, med Kivra-utskick, påminnelser och uppföljning. Personen kan själv begära manuell granskning, t.ex. om hen inte har digital brevlåda.</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Archive -->
+    <div class="section">
+      <h2>Arkivera personer som inte är aktiva</h2>
+      <p>Om en person inte längre är aktiv i föreningen kan ni arkivera personen. Det kan ske på två sätt:</p>
+
+      <div class="action-card">
+        <h4>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B80C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+          Admin arkiverar personen
+        </h4>
+        <p>Klicka in på personen i admin-gränssnittet och välj arkivera.</p>
+      </div>
+
+      <div class="action-card">
+        <h4>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B80C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Personen begär arkivering själv
+        </h4>
+        <p>Förfrågan hamnar i er admin-inbox i systemet, där ni godkänner eller nekar. Detta för att ni som administratör är ansvariga och bestämmer vilka ni begär utdrag ifrån.</p>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          Sportadmin-synk
+        </div>
+        <p>Har ni Sportadmin-synk arkiveras personen automatiskt när hen tas bort från Sportadmin.</p>
+      </div>
     </div>
 
     <div class="divider"></div>
