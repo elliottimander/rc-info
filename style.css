@@ -1,0 +1,528 @@
+/* ──────────────────────────────────────────────────────────────
+   Registercentralen — gemensam stil för infosidorna
+   Speglar designen på registercentralen.com
+   ────────────────────────────────────────────────────────────── */
+
+:root {
+  --rc-blue: #5B80C0;
+  --rc-blue-dark: #4a6da8;
+  --rc-blue-tint: rgba(91, 128, 192, 0.05);
+  --rc-blue-tint-strong: rgba(91, 128, 192, 0.1);
+  --gray-900: #111827;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-200: #e5e7eb;
+  --gray-100: #f3f4f6;
+  --warning: #b45309;
+  --warning-bg: #fffbeb;
+  --success: #15803d;
+  --success-bg: #f0fdf4;
+  --danger: #b91c1c;
+  --danger-bg: #fef2f2;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  color: var(--gray-600);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  color: var(--gray-900);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ── Header (som huvudsajten) ── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.header-login {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-700);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.header-login:hover { color: var(--gray-900); }
+
+/* ── Hero (samma bakgrund som huvudsajten) ── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-image: url("/hero-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-inner {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 56px 24px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 40px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 19px;
+  color: var(--gray-600);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── Innehåll ── */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+.section { margin-bottom: 48px; }
+
+.section h2 {
+  font-size: 26px;
+  margin-bottom: 16px;
+}
+
+.section h3 {
+  font-size: 18px;
+  margin: 24px 0 12px;
+}
+
+.section p {
+  font-size: 17px;
+  margin-bottom: 16px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--gray-200);
+  margin: 48px 0;
+}
+
+/* ── Callouts ── */
+.callout {
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.callout.important { background: var(--warning-bg); }
+.callout.tip { background: var(--rc-blue-tint); }
+.callout.success { background: var(--success-bg); }
+.callout.danger { background: var(--danger-bg); }
+
+.callout-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.callout.important .callout-title { color: var(--warning); }
+.callout.tip .callout-title { color: var(--rc-blue); }
+.callout.success .callout-title { color: var(--success); }
+.callout.danger .callout-title { color: var(--danger); }
+
+.callout p {
+  font-size: 16px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.callout p strong { color: var(--gray-900); }
+
+/* ── Steg (samma stil som /guide på huvudsajten) ── */
+.steps, .process-flow {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0;
+}
+
+.step, .process-step {
+  display: flex;
+  gap: 20px;
+}
+
+.step-indicator, .process-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.step-number, .process-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--rc-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.step-line, .process-line {
+  width: 2px;
+  flex: 1;
+  background: var(--gray-200);
+  min-height: 24px;
+}
+
+.step:last-child .step-line,
+.process-step:last-child .process-line { display: none; }
+
+.step-content, .process-content { padding-bottom: 32px; }
+
+.step:last-child .step-content,
+.process-step:last-child .process-content { padding-bottom: 0; }
+
+.step-content h3, .process-content h4 {
+  font-size: 17px;
+  margin: 8px 0 6px;
+}
+
+.step-content p, .process-content p {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.step-content .sub-note {
+  font-size: 15px;
+  color: var(--rc-blue);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.step-content .sub-warning {
+  font-size: 15px;
+  color: var(--warning);
+  background: var(--warning-bg);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ── Fördelar ── */
+.benefits {
+  display: grid;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.benefit {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.benefit-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--rc-blue-tint-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benefit-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--rc-blue);
+}
+
+.benefit p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ── Funktionskort (admin) ── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.feature-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+}
+
+.feature-card > svg {
+  width: 22px;
+  height: 22px;
+  color: var(--rc-blue);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.feature-text h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.feature-text p {
+  font-size: 15px;
+  margin: 0;
+}
+
+/* ── Sammanfattningsruta ── */
+.summary-box {
+  background: var(--rc-blue-tint);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+
+.summary-box h4 {
+  font-size: 15px;
+  color: var(--rc-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.summary-box p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ── Åtgärdskort ── */
+.action-card {
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.action-card h4 {
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.action-card p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ── Badge ── */
+.badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+
+.badge-auto {
+  background: var(--rc-blue-tint-strong);
+  color: var(--rc-blue);
+}
+
+/* ── Punktlista ── */
+.reason-list {
+  padding-left: 22px;
+  margin: 16px 0;
+  display: grid;
+  gap: 10px;
+}
+
+.reason-list li {
+  font-size: 16px;
+  color: var(--gray-600);
+}
+
+.reason-list li strong { color: var(--gray-900); }
+
+/* ── FAQ ── */
+.faq-item { margin-bottom: 28px; }
+
+.faq-item h3 {
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+
+.faq-item p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ── Exempelbild ── */
+.example-image-section { margin-top: 32px; }
+
+.example-image-section h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.example-image-section .example-intro {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.example-image-frame {
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.example-image-frame img {
+  width: 100%;
+  display: block;
+}
+
+.example-image-caption {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ── Knappar ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--rc-blue);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background 0.15s;
+}
+
+.btn:hover { background: var(--rc-blue-dark); }
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* ── Säkerhet ── */
+.security-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.security-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--rc-blue-tint);
+  border-radius: 12px;
+}
+
+.security-item svg {
+  width: 20px;
+  height: 20px;
+  color: var(--rc-blue);
+  flex-shrink: 0;
+}
+
+.security-item span {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-900);
+}
+
+/* ── Hjälpruta (som "Kör du fast?" på /guide) ── */
+.help-box {
+  background: var(--rc-blue-tint);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.help-box h3 {
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+
+.help-box p {
+  font-size: 17px;
+  margin: 0;
+}
+
+.help-box a {
+  color: var(--rc-blue);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.help-box a:hover { text-decoration: underline; }
+
+.help-wrap { padding: 0 24px 64px; }
+
+/* ── Responsivt ── */
+@media (max-width: 600px) {
+  .hero-inner { padding: 40px 20px; }
+  .hero h1 { font-size: 30px; }
+  .hero p { font-size: 17px; }
+  .content { padding: 32px 20px 48px; }
+  .feature-grid, .security-grid { grid-template-columns: 1fr; }
+}
